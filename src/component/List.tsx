@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "./chat.module.scss";
+import styles from "./list.module.scss";
 import { IState as IProps } from "../App";
 
 // const List = (props: IProps) => {
@@ -12,17 +12,24 @@ const List: React.FC<IProps> = ({people}) => { // Both the lines above are valid
         <li key={index}>
           <p><strong>Name</strong>: {person.name}</p>
           <p><strong>Age</strong>: {person.age}</p>
-          {/* <div>{person.married ? 'Married' : 'Single'}</div> */}
-          <p><strong><em>Note</em></strong>: {person.note}</p>
+          <p><strong>Country</strong>: {person.country}</p>
+          <p><strong>Terms</strong>: {person.terms ? 'Agree' : 'Don\'t agree'}</p>
+          {person.note && <p><em><strong>Note</strong>: {person.note}</em></p>}
         </li>
       )
     })
   }
 
   return (
-    <ul className={styles.list}>
-      {renderList()}
-    </ul>
+    <>
+      {people.length > 0 ?
+        <ul className={styles.list}>
+          {renderList()}
+        </ul>
+        :
+        <p className={styles.listEmpty}>The list is empty. Please add people</p>
+      }
+    </>
   )
 }
 

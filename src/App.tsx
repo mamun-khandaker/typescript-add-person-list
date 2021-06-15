@@ -4,36 +4,20 @@ import Add from './component/Add';
 
 export interface IState {
   people: {
-    // id: number;
     name: string;
     age: number;
-    // married: boolean;
     note?: string;
+    country: string;
+    terms: boolean;
   }[]
 }
 
 function App() {
-  const [peopleData, setPeopleData] = useState<IState['people']>([
-    {
-      // id: 1,
-      name: 'Mamun',
-      age: 30,
-      // married: true,
-      note: 'He\'s trust worthy'
-    },
-
-    {
-      // id: 2,
-      name: 'Michael Jackson',
-      age: 50,
-      // married: false,
-      note: 'He\'s a great dancer'
-    }
-  ])  
+  const [peopleData, setPeopleData] = useState<IState['people']>([]);
 
   return (
     <div className="container">
-      <h1 className="title">List of people</h1>
+      <h1 className="title">List of people - {peopleData.length}</h1>
       <List people={peopleData} />
       <Add peopleData={peopleData} setPeopleData={setPeopleData} />
     </div>

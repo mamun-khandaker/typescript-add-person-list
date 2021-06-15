@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from "./chat.module.scss";
+import styles from "./list.module.scss";
 import { IState as Props } from "../App";
 
 interface IProps {
@@ -12,22 +12,28 @@ const Add: React.FC<IProps> = ({ peopleData, setPeopleData }) => {
   const [input, setInput] = useState({
     name: '',
     age: '',
-    // mStatus: '',
-    note: ''
+    note: '',
+    country: ''
   })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>): void => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>): void => {
     setInput({
       ...input,
       [e.target.name] : e.target.value
     })
   }
 
+  const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setIsChecked(e.target.checked)
+  }
+
   const handleClick = (): void => {
     if (
       !input.name ||
       !input.age ||
-      !input.note
+      !input.country
     ) {
       return;
     }
@@ -37,16 +43,20 @@ const Add: React.FC<IProps> = ({ peopleData, setPeopleData }) => {
       {
         name: input.name,
         age: parseInt(input.age),
-        note: input.note
+        note: input.note,
+        country: input.country,
+        terms: isChecked,
       }
     ])
 
     setInput({
       name: '',
       age: '',
-      // mStatus: '',
-      note: ''
+      note: '',
+      country: ''
     })
+
+    setIsChecked(false);
   }
 
   return (
@@ -73,13 +83,29 @@ const Add: React.FC<IProps> = ({ peopleData, setPeopleData }) => {
         />
       </li>
 
-      {/* <li>
-        <select className={styles.inputField}>
-          <option>Marital status</option>
-          <option>Married</option>
-          <option>Single</option>
+      <li>
+        <select
+          className={styles.inputField}
+          value={input.country}
+          onChange={handleChange}
+          name="country"
+        >
+          <option value="Country">Country</option>
+          <option value="Bangladesh">Bangladesh</option>
+          <option value="United States">United States</option>
+          <option value="England">England</option>
+          <option value="Japan">Japan</option>
+          <option value="Russia">Russia</option>
         </select>
-      </li> */}
+      </li>
+
+      <li>
+        <h4>Terms &amp; conditions</h4>
+        <label>
+          I agree
+          <input type="checkbox" checked={isChecked} onChange={handleCheckbox} />
+        </label>
+      </li>
 
       <li>
         <textarea 
