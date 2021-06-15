@@ -1,12 +1,24 @@
 .list {
   li {
     border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
     margin: 0 0 15px;
     padding: 15px;
 
-    p:last-of-type {
-      margin: 0;
+    p {
+      width: calc(50% - 8px);
+
+      &:last-of-type {
+        margin: 0;
+      }
     }
+  }
+
+  &Empty {
+    font-size: 16px;
+    text-align: center;
   }
 }
 
@@ -14,7 +26,17 @@
   padding: 20px;
 
   li {
-    margin: 0 0 15px;
+    margin: 0 0 10px;
+
+    label {
+      align-items: center;
+      display: inline-flex;
+      padding: 8px;
+
+      input {
+        margin: 0 0 0 6px;
+      }
+    }
   }  
 }
 
